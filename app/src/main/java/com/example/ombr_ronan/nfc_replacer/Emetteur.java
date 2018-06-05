@@ -27,6 +27,7 @@ public class Emetteur extends AppCompatActivity {
     String tag;
     int id, select;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +77,7 @@ public class Emetteur extends AppCompatActivity {
 
     private void initAffichage() {
 
+        origin = findViewById(R.id.liste);
 
         //Cas de rafraichissage de la page
         if(origin.getChildCount() > 0)
@@ -113,7 +115,7 @@ public class Emetteur extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         select = num;
-                        selectEmission(info);
+                        record = creerRecord(info);
                         initAffichage();
                     }
                 });
@@ -126,13 +128,23 @@ public class Emetteur extends AppCompatActivity {
                 line.addView(selected);
             }
 
+            Button delete = new Button(this);
+            delete.setBackgroundResource(R.drawable.trash);
+            delete.setLayoutParams(params);
+            delete.setOnClickListener(new View.OnClickListener() {
+                int num = id;
+
+                @Override
+                public void onClick(View v) {
+                    bdd.delete(num);
+                    initAffichage();
+                }
+            });
+            line.addView(delete);
+
             origin.addView(line);
         }
 
-    }
-
-    private void selectEmission(String message) {
-        record = creerRecord(message);
     }
 
     /********************* NFC *********************/

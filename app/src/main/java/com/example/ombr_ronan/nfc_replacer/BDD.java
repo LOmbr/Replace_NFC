@@ -142,4 +142,9 @@ public class BDD {
         return bdd.delete(TABLE, COL_ID + " = " + nfc.getId(), null) > 0;
     }
 
+    //Suppression
+    public boolean delete(int id) {
+        return bdd.delete(TABLE, COL_ID + " = " + id, null) > 0;
+    }
+
 }
